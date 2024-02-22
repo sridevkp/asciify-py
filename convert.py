@@ -1,4 +1,5 @@
 import sys
+import time
 from PIL import Image, ImageOps
 
 MAX_SIZE = 200 
@@ -17,7 +18,7 @@ height = int(height * scale_f * .5)
 
 raw_img = raw_img.resize( ( width, height ) )
 gs_img = ImageOps.grayscale( raw_img )
-
+gs_img.show()
 px = gs_img.load()
 
 txt = ""
@@ -30,5 +31,9 @@ for y in range(height):
         txt += CHARS[int(index)]
     txt += "\n"
 
-print( txt )
+with open(ascii_out_file_path, "w") as file:
+    file.write( txt )
 
+print("Saved\nYou might wanna zoom out terminal to view properly")
+time.sleep(3)
+print(txt)
